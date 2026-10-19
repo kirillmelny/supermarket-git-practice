@@ -74,7 +74,7 @@ class Order:
 # Зміни від: Олександра Дужака
 # 5. Клас Супермаркет / Магазин (3 властивості, 2 методи)
 class Supermarket:
-    def init(self, name):
+    def __init__(self, name):
         self.name = name
         self.goods = []
         self.cats = set()              # SET (Структура даних 4)
@@ -90,7 +90,7 @@ class Supermarket:
 
 # 6. Клас Симуляція (3 властивості, 2 методи)
 class Simulation:
-    def init(self):
+    def __init__(self):
         self.market = Supermarket("АТБ / Сільпо")
         self.user = Customer("Кіріл", 10000, "Вінниця", "Соборна")
         self.promo = Discount("SUPER2026", 10)
@@ -127,6 +127,6 @@ class Simulation:
 
 
 # Запуск програми
-if name == "main":
+if __name__ == "__main__":
     sim = Simulation()
     sim.simulate()
