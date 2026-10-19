@@ -23,7 +23,7 @@ class Discount:
 #Зміни від : Івасюнько Нікіта
 # 3. Клас Покупець (4 властивості, 3 методи)
 class Customer:
-    def init(self, name, money, city, street):
+    def __init__(self, name, money, city, street):
         self.name = name
         self.money = money
         self.address = (city, street)  # TUPLE (Структура даних 1)
@@ -47,7 +47,7 @@ class Customer:
 
 # 4. Клас Замовлення / Чек (4 властивості, 2 методи)
 class Order:
-    def init(self, order_id, customer):
+    def __init__(self, order_id, customer):
         self.order_id = order_id
         self.customer = customer
         self.status = "Нове"
