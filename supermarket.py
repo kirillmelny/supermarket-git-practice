@@ -71,3 +71,62 @@ class Order:
         print("Адреса доставки:", self.customer.address)
         print("Придбані товари:", self.items)
         print("До сплати (з урахуванням знижок):", price)
+# Зміни від: Олександра Дужака
+# 5. Клас Супермаркет / Магазин (3 властивості, 2 методи)
+class Supermarket:
+    def init(self, name):
+        self.name = name
+        self.goods = []
+        self.cats = set()              # SET (Структура даних 4)
+
+    def add_goods(self, product):
+        self.goods.append(product)
+        self.cats.add(product.category)
+
+    def show_all(self):
+        print("Супермаркет:", self.name)
+        print("Унікальні категорії товарів (Set):", self.cats)
+
+
+# 6. Клас Симуляція (3 властивості, 2 методи)
+class Simulation:
+    def init(self):
+        self.market = Supermarket("АТБ / Сільпо")
+        self.user = Customer("Кіріл", 10000, "Вінниця", "Соборна")
+        self.promo = Discount("SUPER2026", 10)
+
+    def simulate(self):                 # Головний метод simulate()
+        print("=== ПОЧАТОК СИМУЛЯЦІЇ СУПЕРМАРКЕТУ ===")
+        p1 = Product("Молоко", 150, "Молочні продукти")
+        p2 = Product("М'ясо", 1800, "М'ясні вироби")
+        p3 = Product("Хліб", 40, "Випічка")
+
+        self.market.add_goods(p1)
+        self.market.add_goods(p2)
+        self.market.add_goods(p3)
+        self.market.show_all()
+
+        # Покупець набирає кошик
+        self.user.add(p1)
+        self.user.add(p2)
+        self.user.add(p3)
+
+        order = Order(1, self.user)
+        cost = order.process()
+
+        # Промокод
+        if self.promo.check("SUPER2026"):    # IF
+            cost *= self.promo.get_factor()
+
+        # Оплата
+        if self.user.pay(cost):              # IF
+            order.print_check(cost)
+            print("Успіх! Залишок коштів у покупця:", self.user.money)
+        else:
+            print("Помилка: недостатньо коштів!")
+
+
+# Запуск програми
+if name == "main":
+    sim = Simulation()
+    sim.simulate()
